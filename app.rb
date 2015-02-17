@@ -14,13 +14,17 @@ class Pet
   end
 
   # This does an update
+  # UPDATE pets SET name = 'Khurram\'s Pet'
   def save
-    puts "saving"
+    self.class.connection.exec_params("UPDATE pets SET name = $1 WHERE id = $2", [@name, @id])
   end
 
+  # CLASS METHODS BELOW
 
+  # memoize it
   def self.connection
-    conn = PG.connect( 
+    return @conn if @conn
+    @conn = PG.connect( 
       dbname: 'feb2015',
       host: 'localhost',
       port: 5432
