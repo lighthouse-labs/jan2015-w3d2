@@ -13,6 +13,12 @@ class Pet
     @breed = fields['breed']
   end
 
+  # This does an update
+  def save
+    puts "saving"
+  end
+
+
   def self.connection
     conn = PG.connect( 
       dbname: 'feb2015',
@@ -39,9 +45,9 @@ puts pets.inspect
 
 p = pets.first
 # OPTION 1
-p.update(name: 'KDawg', breed: 'Cool Pup')
+# p.update(name: 'KDawg', breed: 'Cool Pup')
 # OPTION 2 (shitty)
-p.update_breed('Cool Pup')
+# p.update_breed('Cool Pup')
 # OPTION 3
 p.name  = 'KDawg' # @name
 p.breed = 'Cool Pup' # @breed
